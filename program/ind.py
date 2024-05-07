@@ -10,7 +10,9 @@
 # Варианты 9 и 10
 
 import math
-from threading import Thread
+from threading import Lock, Thread
+
+lock = Lock()
 
 
 # 10 V
@@ -25,8 +27,8 @@ def sum1(x, eps, s_dict):
         else:
             s += term
             n += 1
-
-    s_dict["s1"] = s
+    with lock:
+        s_dict["s1"] = s
 
 
 # 9 V
@@ -41,8 +43,8 @@ def sum2(x, eps, s_dict):
         else:
             s += term
             n += 1
-
-    s_dict["s2"] = s
+    with lock:
+        s_dict["s2"] = s
 
 
 def main():
